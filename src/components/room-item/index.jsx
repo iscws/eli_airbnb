@@ -6,7 +6,7 @@ import { Carousel } from 'antd';
 import { ItemWrapper } from './style'
 import IconArrowLeft from '@/assets/svg/icon-arrow-left';
 import IconArrowRight from '@/assets/svg/icon-arrow-right';
-import Indicator from '@/base-ui/Indicator';
+import Indicator from '@/base-ui/indicator';
 import classNames from 'classnames';
 
 const RoomItem = memo((props) => {
