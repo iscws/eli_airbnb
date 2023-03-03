@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
 import { Pagination } from '@mui/material'
 import { PaginationWrapper } from './style'
-import { shallowEqual, useSelector, useDispatch } from 'react-redux'
+import {  useSelector, useDispatch } from 'react-redux'
 import { fetchRoomListAction } from '@/store/modules/entire'
 
 
