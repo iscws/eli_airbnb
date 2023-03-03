@@ -5,9 +5,9 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 
 import HomeBanner from './c-cpns/home-banner'
 import HomeLongFor from './c-cpns/home-longfor'
-import HomeSectionV1 from './c-cpns/home-section-v1'
-import HomeSectionV2 from './c-cpns/home-section-v2'
-import HomeSectionV3 from './c-cpns/home-section-v3'
+import HomeSectionV1 from './c-cpns/home-section-V1'
+import HomeSectionV2 from './c-cpns/home-section-V2'
+import HomeSectionV3 from './c-cpns/home-section-V3'
 import { HomeWrapper } from './style'
 
 const Home = memo((props) => {
