@@ -1,3 +1,4 @@
-import hyrequest from "./request";
+import hyRequest from "./request"
 
-export default hyrequest;
+
+export default hyRequest

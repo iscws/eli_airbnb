@@ -1,23 +1,27 @@
-const path = require('path')
-// __dirname为绝对路径
-const resolve = pathname => path.resolve(__dirname, pathname);
+const path = require("path")
 const CracoLessPlugin = require('craco-less');
 
+const resolve = dir => path.resolve(__dirname, dir)
 
 module.exports = {
-    // less
-    plugins: [
-        {
-            plugin: CracoLessPlugin,
+  plugins: [
+    {
+      plugin: CracoLessPlugin,
+      options: {
+        lessLoaderOptions: {
+          lessOptions: {
+            modifyVars: { '@primary-color': '#1DA57A' },
+            javascriptEnabled: true,
+          },
         },
-    ],
-    // 配置webpack
-    webpack: {
-        alias: {
-            "@": resolve("src"),
-            "components": resolve("src/components"),
-            "utils": resolve("src/utils"),
-            "assets": resolve("src/assets")
-        }
+      },
+    },
+  ],
+  webpack: {
+    alias: {
+      "@": resolve("src"),
+      "components": resolve("src/components"),
+      // '@mui/styled-engine': '@mui/styled-engine-sc'
     }
+  }
 }

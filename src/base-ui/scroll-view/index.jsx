@@ -1,51 +1,64 @@
-import IconArrowLeft from '@/assets/svg/icon-arrow-left';
-import IconArrowRight from '@/assets/svg/icon-arrow-right';
-import React, { memo, useEffect, useState } from 'react'
-import { useRef } from 'react';
+import IconArrowLeft from '@/assets/svg/icon-arrow-left'
+import IconArrowRight from '@/assets/svg/icon-arrow-right'
+import React, { memo, useEffect, useRef, useState } from 'react'
 import { ScrollWrapper } from './style'
 
 const ScrollView = memo((props) => {
-    const { children } = props;
-    const [isRightShow, setRightShow] = useState(false);
-    const [isLeftShow, setLeftShow] = useState(false);
-    const [postIndex, setPostIndex] = useState(0);
-    const totalDistanceRef = useRef();
-    const scrollContentRef = useRef();
-    useEffect(() => {
-        const scrollWidth = scrollContentRef.current.scrollWidth;
-        const clientWidth = scrollContentRef.current.clientWidth;
-        const totalDistance = scrollWidth - clientWidth;
-        totalDistanceRef.current = totalDistance;
-        setRightShow(totalDistance > 0);
+  /** 记录正在显示的是哪一个 */
+  const [posIndex, setPosIndex] = useState(0)
+  const [showLeft, setShowLeft] = useState(false)
+  const [showRight, setShowRight] = useState(true)
 
-    }, [children])
+  /** 滚动区域的值 */
+  const scrollRef = useRef()
+  const totalDistanceRef = useRef(0)
+  useEffect(() => {
+    const scrollWidth = scrollRef.current.scrollWidth
+    const clientWidth = scrollRef.current.clientWidth
+    totalDistanceRef.current = scrollWidth - clientWidth
+    setShowRight(totalDistanceRef.current > 0)
+  }, [props.children])
 
-    function controlClickHandle(isRight) {
-        const newIndex = isRight ? postIndex + 1 : postIndex - 1;
-        setPostIndex(newIndex);
-        const scrollOffsetLeft = scrollContentRef.current.children[newIndex].offsetLeft;
-        scrollContentRef.current.style.transform = `translateX(-${scrollOffsetLeft}px)`;
-        setRightShow(totalDistanceRef.current > scrollOffsetLeft);
-        setLeftShow(scrollOffsetLeft > 0);
-        setRightShow(totalDistanceRef.current > scrollOffsetLeft);
+  /** 事件处理 */
+  function leftClickHandle() {
+    scrollPosition(posIndex-1)
+  }
 
+  function rightClickHandle() {
+    scrollPosition(posIndex + 1)
+  }
+
+  function scrollPosition(index) {
+    const scrollLeft = scrollRef.current.children[index].offsetLeft
+    scrollRef.current.style.transform = `translate(-${scrollLeft}px)`
+    setPosIndex(index)
+    if (scrollLeft > totalDistanceRef.current) {
+      setShowRight(false)
     }
+    setShowRight(totalDistanceRef.current > scrollLeft)
+    setShowLeft(scrollLeft > 0)
+  }
 
-    return (
-        <ScrollWrapper >
-            {isLeftShow && <div className='control left' onClick={e => controlClickHandle(false)}><IconArrowLeft /></div>}
-
-            {isRightShow && <div className='control right' onClick={e => controlClickHandle(true)}><IconArrowRight /></div>}
-
-            <div className="scroll">
-                <div className='scroll-content' ref={scrollContentRef}>
-                    {children}
-                </div>
-            </div>
-
-
-        </ScrollWrapper >
-    )
+  return (
+    <ScrollWrapper>
+      {showLeft && (
+        <div className='control left' onClick={leftClickHandle}>
+          <IconArrowLeft/>
+        </div>
+      )}
+      {showRight && (
+        <div className='control right' onClick={rightClickHandle}>
+          <IconArrowRight/>
+        </div>
+      )}
+      <div className='content'>
+        <div className='scroll' ref={scrollRef}>
+          {props.children}
+        </div>
+      </div>
+    </ScrollWrapper>
+  )
 })
+
 
 export default ScrollView

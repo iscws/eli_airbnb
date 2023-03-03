@@ -5,28 +5,28 @@ import { useNavigate } from 'react-router-dom'
 import { FooterWrapper } from './style'
 
 const SectionFooter = memo((props) => {
-    const { name } = props;
-    let message = '查看更多';
-    if (name) {
-        message = `查看更多${name}的房源`
-    }
+  const { name } = props
 
-    const navigate = useNavigate();
-    function moreClickHandle() {
-        navigate("/entires");
-    }
-    return (
-        <FooterWrapper color={name ? "#00848A" : "#000"}>
-            <div className="info" onClick={moreClickHandle}>
-                <span className="text">{message}</span>
-                <IconMoreArrow />
-            </div>
-        </FooterWrapper>
-    )
+  let showName = "查看全部"
+  if (name) {
+    showName = `查看更多${name}房源`
+  }
+
+  const navigate = useNavigate()
+  function showEntireHandle() {
+    navigate("/entire")
+  }
+
+  return (
+    <FooterWrapper name={name} onClick={showEntireHandle}>
+      <span className='text'>{showName}</span>
+      <IconMoreArrow/>
+    </FooterWrapper>
+  )
 })
 
 SectionFooter.propTypes = {
-    name: PropTypes.string
+  name: PropTypes.string
 }
 
 export default SectionFooter

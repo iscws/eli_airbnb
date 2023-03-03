@@ -14,7 +14,7 @@ export const FooterWrapper = styled.div`
   .service {
     display: flex;
 
-    .item { 
+    .item {
       flex: 1;
 
       .name {

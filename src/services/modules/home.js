@@ -1,8 +1,14 @@
 import hyRequest from "..";
 
-export function getHomeGoodPriceData() {
+export function getHomeDiscountData() {
   return hyRequest.get({
-    url: "/home/goodprice"
+    url: "/home/discount"
+  })
+}
+
+export function getHomeHotRecommendData() {
+  return hyRequest.get({
+    url: "/home/hotrecommenddest"
   })
 }
 
@@ -12,26 +18,20 @@ export function getHomeHighScoreData() {
   })
 }
 
-export function getHomeDiscountData() {
+export function getHomeGoodPriceData() {
   return hyRequest.get({
-    url: "/home/discount"
+    url: "/home/goodprice"
   })
 }
 
-export function getHomeRecommendData() {
+export function getHomePlusData() {
   return hyRequest.get({
-    url: '/home/hotrecommenddest'
+    url: "/home/plus"
   })
 }
 
-export function getLongForData() {
+export function getHomeLongforData() {
   return hyRequest.get({
-    url: '/home/longfor',
-  })
-}
-
-export function getPlusData() {
-  return hyRequest.get({
-    url:'/home/plus',
+    url: "/home/longfor"
   })
 }

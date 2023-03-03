@@ -1,54 +1,49 @@
-import React, { memo } from 'react'
-import { useEffect } from 'react'
+import { fetchHomeAllDataAction } from '@/store/features/home'
+import { changeHeaderConfigAction } from '@/store/features/main'
+import React, { memo, useEffect } from 'react'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 
-import { fetchHomeDataAction } from '@/store/modules/home'
-import HomeSectionV1 from './c-cpns/home-section-V1'
 import HomeBanner from './c-cpns/home-banner'
+import HomeLongFor from './c-cpns/home-longfor'
+import HomeSectionV1 from './c-cpns/home-section-v1'
+import HomeSectionV2 from './c-cpns/home-section-v2'
+import HomeSectionV3 from './c-cpns/home-section-v3'
 import { HomeWrapper } from './style'
-import HomeSectionV2 from './c-cpns/home-section-V2'
-import { isEmptyO } from '@/utils/is-empty-object'
-import HomeLongfor from './c-cpns/home-longfor'
-import HomeSectionV3 from './c-cpns/home-section-V3'
 
+const Home = memo((props) => {
 
-const Home = memo(() => {
-    // 获取数据
-    const { goodPriceInfo, highScoreInfo, discountInfo, recommendInfo, longForInfo, plusInfo } = useSelector(state => ({
-        goodPriceInfo: state.home.goodPriceInfo,
-        highScoreInfo: state.home.highScoreInfo,
-        discountInfo: state.home.discountInfo,
-        recommendInfo: state.home.recommendInfo,
-        longForInfo: state.home.longForInfo,
-        plusInfo: state.home.plusInfo,
-    }), shallowEqual)
+  /** 从redux中获取数据 */
+  const { discountInfo, hotRecommendInfo, highScoreInfo, goodPriceInfo, plusInfo, longForInfo } = useSelector((state) => ({
+    discountInfo: state.home.discountInfo,
+    hotRecommendInfo: state.home.hotRecommendInfo,
+    highScoreInfo: state.home.highScoreInfo,
+    goodPriceInfo: state.home.goodPriceInfo,
+    plusInfo: state.home.plusInfo,
+    longForInfo: state.home.longForInfo
+  }), shallowEqual)
 
+  /** 派发事件,发送网络请求 */
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(fetchHomeAllDataAction())
+    dispatch(changeHeaderConfigAction({ isFixed: true, isHome: true }))
+  }, [dispatch])
 
-    // 派发异步请求，获取数据
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(fetchHomeDataAction());
-    }, [dispatch])
-
-    // const { title, list } = goodPriceInfo;
-    return (
-        <HomeWrapper>
-            <HomeBanner />
-            <div className="content">
-
-                {isEmptyO(discountInfo) && <HomeSectionV2 infoData={discountInfo}></HomeSectionV2>}
-                {isEmptyO(recommendInfo) && <HomeSectionV2 infoData={recommendInfo}></HomeSectionV2>}
-
-                {isEmptyO(longForInfo) && <HomeLongfor infoData={longForInfo}></HomeLongfor>}
-
-                {isEmptyO(goodPriceInfo) && <HomeSectionV1 infoData={goodPriceInfo}></HomeSectionV1>}
-                {isEmptyO(highScoreInfo) && <HomeSectionV1 infoData={highScoreInfo}></HomeSectionV1>}
-                {isEmptyO(plusInfo) && <HomeSectionV3 infoData={plusInfo}></HomeSectionV3>}
-
-            </div>
-        </HomeWrapper>
-
-    )
+  return (
+    <HomeWrapper>
+      <HomeBanner/>
+      <div className='content'>
+        <HomeSectionV1 infoData={discountInfo}/>
+        <HomeSectionV1 infoData={hotRecommendInfo}/>
+        <HomeLongFor infoData={longForInfo}/>
+        <HomeSectionV2 infoData={highScoreInfo}/>
+        <HomeSectionV2 infoData={goodPriceInfo}/>
+        <HomeSectionV3 infoData={plusInfo}/>
+      </div>
+    </HomeWrapper>
+  )
 })
+
+Home.propTypes = {}
 
 export default Home

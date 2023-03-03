@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-
-export const HomeSectionWrapper = styled.div`
-    margin-top: 30px;
-
+export const SectionV1Wrapper = styled.div`
+  margin-top: 36px;
 `

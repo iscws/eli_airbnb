@@ -1,10 +1,7 @@
 import styled from "styled-components";
 
-
 export const TabsWrapper = styled.div`
-
-    margin:-8px 0 12px;
-    .item {
+  .item {
     box-sizing: border-box;
     flex-basis: 120px;
     flex-shrink: 0;
@@ -27,5 +24,4 @@ export const TabsWrapper = styled.div`
       background-color: ${props => props.theme.color.secondaryColor};
     }
   }
-
 `

@@ -1,79 +1,49 @@
 import styled from "styled-components"
 
-const RightWrapper = styled.div`
-  flex:1;
-  display:flex;
-  justify-content:flex-end;
-  color:${props => props.theme.text.primaryColor};
+export const RightWrapper = styled.div`
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  color: ${props => props.theme.isAlpha ? "#fff": "#484848"};
   font-weight: 600;
-  
+
   .btns {
-    display:flex;
+    display: flex;
     align-items: center;
 
     .btn {
-      height:18px;
-      line-height:18px;
-      padding:12px 12px;
-      border-radius:22px;
+      height: 18px;
+      line-height: 18px;
+      box-sizing: content-box;
+      padding: 12px 15px;
       cursor: pointer;
-  
+      border-radius: 22px;
+
       &:hover {
-        background-color: #f7f7f7;
-        border-radius:22px;
+        background-color: #f5f5f5;
       }
     }
-
-   
   }
-  .profiles {
-      position:relative;
-      display: flex;
-      width: 77px;
-      height: 42px;
-      justify-content: space-evenly;
-      align-items: center;
-      margin:0 10px;
-      box-sizing: border-box;
-      border: 1px solid #ccc;
-      border-radius: 25px;
-      background-color: #fff;
-      cursor: pointer;   
-      ${props => props.theme.mixin.boxShadow};
-      
-      .pannel {
-        position:absolute;
-        top:54px;
-        right:0;
-        padding:8px 0;
-        width:240px;
-        color:${props => props.theme.text.secondaryColor};
-        font-weight:400;
-        background-color: #fff;
-        box-shadow: 0 0 6px  rgba(0,0,0,.18);
-        border-radius:18px;
-        overflow:hidden;
-        .top {
-          border-bottom:1px solid #dddddd;
-          padding-bottom: 10px;
-        }
 
-        .bottom {
-          padding-top: 10px;
-        }
-        .item {
-          padding:12px 15px;
+  .profile {
+    display: flex;
+    width: 77px;
+    height: 42px;
+    justify-content: space-evenly;
+    align-items: center;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    color: #484848;
+    border-radius: 25px;
+    background-color: #fff;
+    cursor: pointer;
 
-          &:hover {
-            background-color: #f7f7f7;
-          }
-        }
+    /* transition: box-shadow 0.2s ease;
+    &:hover {
+      box-shadow: 0 2px 4px rgba(0,0,0,0.18);
+    } */
 
-        
-      }
-
-    }
-
-
+    ${props => props.theme.mixin.boxShadow}
+  }
 `
-export default RightWrapper
